@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { Inter } from "next/font/google";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import styles from "../styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,15 +15,65 @@ export default function Home() {
 
       <section>
         <h2>📝エンジニアのブログ</h2>
-        <div>
+        <div className={styles.grid}>
           <article>
             <Link href="/">
-              <img src="/images/thumbnail01.jpg" alt="" />
+              <img
+                src="/images/thumbnail01.jpg"
+                className={styles.thumbnailImage}
+              />
             </Link>
             <Link href="/">
-              <a>SSGとSSRの使い分けの場面はいつなのか？</a>
-              <br></br>
-              <small>February 23, 2020</small>
+              <a className={utilStyles.boldText}>
+                SSGとSSRの使い分けの場面はいつなのか？
+              </a>
+              <br />
+              <small className={utilStyles.lightText}>February 23, 2020</small>
+            </Link>
+          </article>
+          <article>
+            <Link href="/">
+              <img
+                src="/images/thumbnail01.jpg"
+                className={styles.thumbnailImage}
+              />
+            </Link>
+            <Link href="/">
+              <a className={utilStyles.boldText}>
+                SSGとSSRの使い分けの場面はいつなのか？
+              </a>
+              <br />
+              <small className={utilStyles.lightText}>February 23, 2020</small>
+            </Link>
+          </article>
+          <article>
+            <Link href="/">
+              <img
+                src="/images/thumbnail01.jpg"
+                className={styles.thumbnailImage}
+              />
+            </Link>
+            <Link href="/">
+              <a className={utilStyles.boldText}>
+                SSGとSSRの使い分けの場面はいつなのか？
+              </a>
+              <br />
+              <small className={utilStyles.lightText}>February 23, 2020</small>
+            </Link>
+          </article>
+          <article>
+            <Link href="/">
+              <img
+                src="/images/thumbnail01.jpg"
+                className={styles.thumbnailImage}
+              />
+            </Link>
+            <Link href="/">
+              <a className={utilStyles.boldText}>
+                SSGとSSRの使い分けの場面はいつなのか？
+              </a>
+              <br />
+              <small className={utilStyles.lightText}>February 23, 2020</small>
             </Link>
           </article>
         </div>
