@@ -1,81 +1,52 @@
 import Layout from "@/components/Layout";
-import { Inter } from "next/font/google";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import { getPostsData } from "/lib/post";
 
-const inter = Inter({ subsets: ["latin"] });
+//SSGの場合
+export async function getStaticProps() {
+  const allPostsData = getPostsData();
+  console.log(allPostsData);
 
-export default function Home() {
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+//SSRの場合(contextにはrequestされたときのパラメータが入る)
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//       //コンポーネントに渡すためのprops
+//     },
+//   };
+// }
+
+export default function Home({ allPostsData }) {
   return (
     <Layout>
       <section className={utilStyles.headingMd}>
         <p>私は駆け出しエンジニアです。Next.jsを勉強しています。</p>
       </section>
 
-      <section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2>📝エンジニアのブログ</h2>
         <div className={styles.grid}>
-          <article>
-            <Link href="/">
-              <img
-                src="/images/thumbnail01.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>
-                SSGとSSRの使い分けの場面はいつなのか？
-              </a>
-              <br />
-              <small className={utilStyles.lightText}>February 23, 2020</small>
-            </Link>
-          </article>
-          <article>
-            <Link href="/">
-              <img
-                src="/images/thumbnail01.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>
-                SSGとSSRの使い分けの場面はいつなのか？
-              </a>
-              <br />
-              <small className={utilStyles.lightText}>February 23, 2020</small>
-            </Link>
-          </article>
-          <article>
-            <Link href="/">
-              <img
-                src="/images/thumbnail01.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>
-                SSGとSSRの使い分けの場面はいつなのか？
-              </a>
-              <br />
-              <small className={utilStyles.lightText}>February 23, 2020</small>
-            </Link>
-          </article>
-          <article>
-            <Link href="/">
-              <img
-                src="/images/thumbnail01.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>
-                SSGとSSRの使い分けの場面はいつなのか？
-              </a>
-              <br />
-              <small className={utilStyles.lightText}>February 23, 2020</small>
-            </Link>
-          </article>
+          {allPostsData.map(({ id, title, date, thumbnail }) => (
+            <article key={id}>
+              <Link href={`/posts/${id}`}>
+                <img src={`${thumbnail}`} className={styles.thumbnailImage} />
+              </Link>
+              <Link href={`/posts/${id}`}>
+                <a className={utilStyles.boldText}>{title}</a>
+                <br></br>
+                <small className={utilStyles.lightText}>{date}</small>
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
     </Layout>
