@@ -1,8 +1,9 @@
-import Layout from "@/components/Layout";
+import Layout, { siteTitle } from "@/components/Layout";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { getPostsData } from "/lib/post";
+import Head from "next/head";
 
 //SSGの場合
 export async function getStaticProps() {
@@ -28,6 +29,9 @@ export async function getStaticProps() {
 export default function Home({ allPostsData }) {
   return (
     <Layout>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
       <section className={utilStyles.headingMd}>
         <p>私は駆け出しエンジニアです。Next.jsを勉強しています。</p>
       </section>
